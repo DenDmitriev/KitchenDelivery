@@ -8,8 +8,39 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    @ObservedObject private var viewModel: MainViewModel
+    
+    init() {
+        self.viewModel = MainViewModel()
+    }
+    
     var body: some View {
-        Text("Main")
+        NavigationStack {
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.flexible())]) {
+                    ForEach(viewModel.categories, id: \.id) { category in
+                        NavigationLink {
+                            CategoryView(category: category)
+                        } label: {
+                            CategoryItem(category: category)
+                                .padding(.horizontal, GridApp.pt16)
+                        }
+                    }
+                }
+                .padding(.top)
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    LocationAddressView()
+                }
+
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Image("account")
+                        .clipShape(Circle())
+                }
+            }
+        }
     }
 }
 
