@@ -38,6 +38,11 @@ struct MainTabView: View {
                     Label("Аккаунт", image: "AccountIcon")
                 }
         }
+        .onAppear {
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithDefaultBackground()
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        }
     }
 }
 
