@@ -31,6 +31,7 @@ struct MainTabView: View {
                 .tabItem {
                     Label("Корзина", image: "BasketIcon")
                 }
+                .environmentObject(UserSession.shared.orderService)
 
             AccountView()
                 .tabItem {
