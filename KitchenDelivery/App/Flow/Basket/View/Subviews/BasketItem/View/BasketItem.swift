@@ -37,18 +37,10 @@ struct BasketItem: View {
                 Text(dishModel.name)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                HStack(spacing: .zero) {
-                    Text(dishModel.price)
-                        .font(Font.system(size: GridApp.pt14))
-                    Text(" · ")
-                        .foregroundColor(.secondary)
-                    Text(dishModel.weight)
-                        .foregroundColor(.secondary)
-                        
-                }
-                .font(CustomFont.title14)
-                .kerning(0.14)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                PriceWeightView(price: dishModel.price, weight: dishModel.weight)
+                    .font(CustomFont.title14)
+                    .kerning(0.14)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             
             OrderButtonView(dish: viewModel.dish)

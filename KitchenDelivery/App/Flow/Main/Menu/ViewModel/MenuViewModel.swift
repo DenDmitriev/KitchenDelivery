@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class MainViewModel: ObservableObject {
+class MenuViewModel: ObservableObject {
     
     @Published var categories = [Category]()
     

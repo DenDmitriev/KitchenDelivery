@@ -46,18 +46,10 @@ struct ProductView: View {
                 .kerning(0.16)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            HStack(spacing: .zero) {
-                Text(productModel.price)
-                    .font(Font.system(size: GridApp.pt14))
-                Text(" · ")
-                    .foregroundColor(.secondary)
-                Text(productModel.weight)
-                    .foregroundColor(.secondary)
-                    
-            }
-            .font(CustomFont.title14)
-            .kerning(0.14)
-            .frame(maxWidth: .infinity, alignment: .leading)
+            PriceWeightView(price: productModel.price, weight: productModel.weight)
+                .font(CustomFont.title14)
+                .kerning(0.14)
+                .frame(maxWidth: .infinity, alignment: .leading)
             
             Text(productModel.description)
                 .font(CustomFont.title14)
