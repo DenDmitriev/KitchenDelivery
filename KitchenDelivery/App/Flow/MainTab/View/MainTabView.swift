@@ -9,34 +9,40 @@ import SwiftUI
 
 struct MainTabView: View {
     
+    @ObservedObject private var coordinator: MainTabCoordinator
     @ObservedObject private var viewModel: MainTabViewModel
     
     init() {
-        self.viewModel = MainTabViewModel()
+        viewModel = MainTabViewModel()
+        coordinator = MainTabCoordinator()
     }
     
     var body: some View {
-        TabView {
-            MainView()
+        TabView(selection: $coordinator.tab) {
+            MenuView()
                 .tabItem {
                     Label("Главная", image: "MainIcon")
                 }
+                .tag(MainTab.menu)
             
             SearchView()
                 .tabItem {
                     Label("Поиск", image: "SearchIcon")
                 }
+                .tag(MainTab.search)
 
             BasketView()
                 .tabItem {
                     Label("Корзина", image: "BasketIcon")
                 }
                 .environmentObject(UserSession.shared.orderService)
+                .tag(MainTab.basket)
 
             AccountView()
                 .tabItem {
                     Label("Аккаунт", image: "AccountIcon")
                 }
+                .tag(MainTab.account)
         }
         .onAppear {
             let tabBarAppearance = UITabBarAppearance()

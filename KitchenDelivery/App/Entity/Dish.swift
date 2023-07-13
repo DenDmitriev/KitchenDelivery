@@ -56,10 +56,10 @@ extension Dish {
 extension Dish: Weighable, Priceable {
     
     func priceFormatted() -> String {
-        CurrencyFormatter.shared.formatter(by: Double(self.price))
+        CurrencyFormatter.formatter(by: Double(self.price))
     }
     
     func weightFormatted() -> String {
-        WeightFormatter.shared.formatter(by: Double(self.weight))
+        WeightFormatter.formatter(by: Double(self.weight))
     }
 }

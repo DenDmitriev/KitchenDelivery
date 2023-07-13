@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct MenuView: View {
     
-    @ObservedObject private var viewModel: MainViewModel
+    @ObservedObject private var viewModel: MenuViewModel
     
     init() {
-        self.viewModel = MainViewModel()
+        self.viewModel = MenuViewModel()
     }
     
     var body: some View {
@@ -46,6 +46,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MenuView()
     }
 }
