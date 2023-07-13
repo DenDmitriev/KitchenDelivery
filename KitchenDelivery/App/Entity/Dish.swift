@@ -7,6 +7,14 @@
 
 import Foundation
 
+protocol Weighable {
+    func weightFormatted() -> String
+}
+
+protocol Priceable {
+    func priceFormatted() -> String
+}
+
 struct Dish: Codable, Hashable, Comparable {
     let id: Int
     let name: String
@@ -42,5 +50,16 @@ struct Dish: Codable, Hashable, Comparable {
 extension Dish {
     struct DishesResponse: Codable {
         let dishes: [Dish]
+    }
+}
+
+extension Dish: Weighable, Priceable {
+    
+    func priceFormatted() -> String {
+        CurrencyFormatter.shared.formatter(by: Double(self.price))
+    }
+    
+    func weightFormatted() -> String {
+        WeightFormatter.shared.formatter(by: Double(self.weight))
     }
 }
