@@ -7,20 +7,16 @@
 
 import Foundation
 
-class WeightFormatter {
+struct WeightFormatter {
     
-    static let shared = WeightFormatter()
-    
-    private init() {}
-    
-    static let formatter: MassFormatter = {
+    static private let formatter: MassFormatter = {
         let formatter = MassFormatter()
         formatter.numberFormatter.locale = Locale.init(components: .init(identifier: "ru_RU"))
         formatter.unitStyle = .medium
         return formatter
     }()
     
-    func formatter(by mass: Double) -> String {
+    static func formatter(by mass: Double) -> String {
         let string = WeightFormatter.formatter.string(fromValue: mass, unit: .gram)
         return string
     }

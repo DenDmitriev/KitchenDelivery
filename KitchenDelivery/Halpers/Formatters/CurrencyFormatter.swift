@@ -7,13 +7,9 @@
 
 import Foundation
 
-class CurrencyFormatter {
+struct CurrencyFormatter {
     
-    static let shared = CurrencyFormatter()
-    
-    private init() {}
-    
-    static let formatter: NumberFormatter = {
+    static private let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.locale = Locale.init(components: .init(identifier: "ru_RU"))
         formatter.numberStyle = .currency
@@ -22,7 +18,7 @@ class CurrencyFormatter {
         return formatter
     }()
     
-    func formatter(by price: Double) -> String {
+    static func formatter(by price: Double) -> String {
         let string = CurrencyFormatter.formatter.string(for: price)
         return string ?? ""
     }

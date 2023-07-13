@@ -29,12 +29,12 @@ struct BasketView: View {
                 }
                 
                 Button {
-                    print("Pay action")
+                    viewModel.toPay()
                 } label: {
                     ZStack {
                         Color.accentColor
                         
-                        Text("Оплатить \(CurrencyFormatter.shared.formatter(by: Double(orderService.total)))")
+                        Text("Оплатить \(CurrencyFormatter.formatter(by: Double(orderService.total)))")
                             .font(Font.system(size: GridApp.pt16).weight(.medium))
                             .kerning(0.1)
                             .multilineTextAlignment(.center)
