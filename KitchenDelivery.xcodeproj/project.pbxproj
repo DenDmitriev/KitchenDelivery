@@ -291,7 +291,7 @@
 		955A16CA2A5D8A840012C5EA /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				955A174D2A5F01730012C5EA /* Main */,
+				955A174D2A5F01730012C5EA /* Menu */,
 				955A171A2A5DE0810012C5EA /* Category */,
 				955A16D02A5D8AD10012C5EA /* Product */,
 				954D0BD12A5FD3CD000C86C5 /* OrderButton */,
@@ -325,7 +325,6 @@
 			children = (
 				955A16DD2A5D8FAC0012C5EA /* View */,
 				955A16DE2A5D8FB10012C5EA /* ViewModel */,
-				955A16DF2A5D90070012C5EA /* Model */,
 			);
 			path = MainTab;
 			sourceTree = "<group>";
@@ -360,20 +359,6 @@
 				955A16E92A5D90940012C5EA /* MainTabViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		955A16DF2A5D90070012C5EA /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		955A16E02A5D901A0012C5EA /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		955A16E12A5D901A0012C5EA /* View */ = {
@@ -603,14 +588,13 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
-		955A174D2A5F01730012C5EA /* Main */ = {
+		955A174D2A5F01730012C5EA /* Menu */ = {
 			isa = PBXGroup;
 			children = (
 				955A16E12A5D901A0012C5EA /* View */,
 				955A16E22A5D901A0012C5EA /* ViewModel */,
-				955A16E02A5D901A0012C5EA /* Model */,
 			);
-			path = Main;
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		955A17502A5F077C0012C5EA /* ViewModel */ = {
