@@ -10,4 +10,7 @@ import SwiftUI
 
 class BasketViewModel: ObservableObject {
 
+    func toPay() {
+        print("Pay action")
+    }
 }

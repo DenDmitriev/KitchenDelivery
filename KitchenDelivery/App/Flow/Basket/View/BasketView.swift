@@ -29,7 +29,7 @@ struct BasketView: View {
                 }
                 
                 Button {
-                    print("Pay action")
+                    viewModel.toPay()
                 } label: {
                     ZStack {
                         Color.accentColor
