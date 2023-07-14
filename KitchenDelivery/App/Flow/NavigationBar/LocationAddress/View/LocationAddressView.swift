@@ -9,10 +9,10 @@ import SwiftUI
 
 struct LocationAddressView: View {
     
-    @ObservedObject private var viewModel: LocationAddressViewModel
+    @ObservedObject var viewModel: LocationAddressViewModel
     
-    init() {
-        self.viewModel = LocationAddressViewModel()
+    init(viewModel: LocationAddressViewModel = LocationAddressViewModel()) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -20,11 +20,11 @@ struct LocationAddressView: View {
             Image("locationMark")
             
             VStack(alignment: .leading, spacing: GridApp.pt4) {
-                Text(viewModel.city ?? "City")
+                Text(viewModel.city ?? "")
                     .font(CustomFont.titleMedium18)
                     .foregroundColor(.primary)
                 
-                Text(viewModel.dateString ?? "Date")
+                Text(viewModel.dateString ?? "")
                     .font(CustomFont.title14)
                     .kerning(0.14)
                     .foregroundColor(.secondary)
@@ -35,7 +35,7 @@ struct LocationAddressView: View {
 
 struct LoactionAdressView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationAddressView()
+        LocationAddressView(viewModel: LocationAddressViewModel())
             .previewLayout(.fixed(width: 300, height: 50))
     }
 }

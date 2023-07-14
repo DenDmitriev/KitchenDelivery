@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct SearchView: View {
+    
+    @ObservedObject var viewModel: SearchViewModel
+    
+    init(viewModel: SearchViewModel) {
+        self.viewModel = viewModel
+    }
+    
     var body: some View {
         Text("Search")
     }
@@ -15,6 +22,6 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView()
+        SearchView(viewModel: SearchViewModel())
     }
 }

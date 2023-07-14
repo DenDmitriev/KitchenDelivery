@@ -9,11 +9,10 @@ import SwiftUI
 
 struct CategoryView: View {
     
+    @EnvironmentObject var coordinator: MainTabCoordinator
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject private var viewModel: CategoryViewModel
+    @ObservedObject var viewModel: CategoryViewModel
     @State private var selectedTag: Int = .zero
-    @State private var showingDish: Bool = false
-    @State var selectedDishID: Int = .zero
     
     let columns: [GridItem] = [
         GridItem(.flexible()),
@@ -21,8 +20,8 @@ struct CategoryView: View {
         GridItem(.flexible())
     ]
     
-    init(category: Category) {
-        self.viewModel = CategoryViewModel(category: category)
+    init(viewModel: CategoryViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -38,8 +37,7 @@ struct CategoryView: View {
                         dish.tags.contains(Category.tags[selectedTag])
                     }), id: \.id) { dish in
                         Button {
-                            selectedDishID = dish.id
-                            showingDish.toggle()
+                            viewModel.showDish(coordinator: coordinator, dish: dish)
                         } label: {
                             DishItem(dish: dish)
                         }
@@ -52,8 +50,7 @@ struct CategoryView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Image("account")
-                    .clipShape(Circle())
+                AccountButton()
             }
             
             ToolbarItem(placement: .navigationBarLeading) {
@@ -64,24 +61,26 @@ struct CategoryView: View {
                         .accentColor(.primary)
                 }
             }
-        }.overlay {
-            ZStack {
-                if $showingDish.wrappedValue,
-                   let dish = viewModel.getDish(by: selectedDishID) {
-                    Color.black.opacity(GridApp.part4)
-                        .ignoresSafeArea()
-                    ProductView(showingDish: $showingDish,
-                                dish: dish)
-                        .padding(.horizontal, GridApp.pt16)
-                }
-            }
-            .animation(.easeIn(duration: GridApp.part2), value: showingDish)
         }
+//        .overlay {
+//            ZStack {
+//                if $showingDish.wrappedValue,
+//                   let dish = viewModel.getDish(by: selectedDishID) {
+//                    Color.black.opacity(GridApp.part4)
+//                        .ignoresSafeArea()
+//                    ProductView(showingDish: $showingDish,
+//                                dish: dish)
+//                    .padding(.horizontal, GridApp.pt16)
+//                }
+//            }
+//            .animation(.default, value: showingDish)
+//        }
     }
 }
 
 struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryView(category: MockData.category)
+        CategoryView(viewModel: CategoryViewModel(category: MockData.category))
+            .environmentObject(MainTabCoordinator())
     }
 }

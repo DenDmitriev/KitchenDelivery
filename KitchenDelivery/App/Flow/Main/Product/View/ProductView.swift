@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProductView: View {
     
+    @EnvironmentObject var coordinator: MainTabCoordinator
     @ObservedObject private var viewModel: ProductViewModel
     @Binding var showingDish: Bool
     @StateObject var orderService: OrderService
@@ -57,11 +58,22 @@ struct ProductView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(.primary.opacity(0.65))
             
-            OrderButtonView(dish: viewModel.dish)
-                .foregroundColor(.white)
-                .background(Color.accentColor)
-                .cornerRadius(GridApp.cr10)
-                .environmentObject(orderService)
+            HStack {
+                OrderButtonView(dish: viewModel.dish)
+                    .foregroundColor(.white)
+                    .background(Color.accentColor)
+                    .cornerRadius(GridApp.cr10)
+                    .environmentObject(orderService)
+                
+                if viewModel.dishInBasket(orderService: orderService) {
+                    Button {
+                        coordinator.tab = .basket
+                    } label: {
+                        Image("BasketIcon")
+                            .padding(.horizontal)
+                    }
+                }
+            }
         }
         .padding(GridApp.pt16)
         .overlay {
@@ -78,7 +90,7 @@ struct ProductView: View {
                     }
                     
                     Button {
-                        showingDish.toggle()
+                        showingDish = false
                     } label: {
                         Image("xmark")
                             .padding(GridApp.pt10)
@@ -102,5 +114,6 @@ struct ProductView_Previews: PreviewProvider {
     static var previews: some View {
         ProductView(showingDish: Binding<Bool>.constant(false),
                     dish: MockData.dish)
+        .environmentObject(MainTabCoordinator())
     }
 }
