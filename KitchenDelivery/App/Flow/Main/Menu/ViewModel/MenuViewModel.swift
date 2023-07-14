@@ -10,31 +10,30 @@ import Combine
 
 class MenuViewModel: ObservableObject {
     
-    @Published var categories = [Category]()
+    @Published var categoryViewModels = [CategoryViewModel]()
     
     private var store = Set<AnyCancellable>()
     
     init() {
-        fetchKitchens()
     }
     
-    private func fetchKitchens() {
+    func fetchKitchens() {
         guard let url = URLConfiguration.shared.categories()
-        else {
-            return
-        }
+        else { return }
         let networkService = NetworkService()
         networkService.getCategories(url: url)
             .receive(on: RunLoop.main)
             .sink { completion in
                 switch completion {
                 case .finished:
-                    print(completion)
+                    return
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             } receiveValue: { response in
-                self.categories = response.сategories
+                response.сategories.forEach {
+                    self.categoryViewModels.append(CategoryViewModel(category: $0))
+                }
             }
             .store(in: &store)
     }

@@ -11,6 +11,11 @@ struct BasketView: View {
     
     @ObservedObject private var viewModel = BasketViewModel()
     @EnvironmentObject var orderService: OrderService
+    @EnvironmentObject var locationViewModel: LocationAddressViewModel
+    
+    init(viewModel: BasketViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         NavigationStack {
@@ -34,7 +39,9 @@ struct BasketView: View {
                     ZStack {
                         Color.accentColor
                         
-                        Text("Оплатить \(CurrencyFormatter.formatter(by: Double(orderService.total)))")
+                        Text(viewModel.orderIsEmpty(orderService: orderService)
+                             ? "Выберите блюдо в меню"
+                             : "Оплатить \(viewModel.totalOrder(orderService: orderService))")
                             .font(Font.system(size: GridApp.pt16).weight(.medium))
                             .kerning(0.1)
                             .multilineTextAlignment(.center)
@@ -44,12 +51,12 @@ struct BasketView: View {
                     .frame(maxWidth: .infinity)
                     .cornerRadius(GridApp.cr10)
                     .padding(GridApp.pt16)
-                    
                 }
+                .disabled(viewModel.orderIsEmpty(orderService: orderService))
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    LocationAddressView()
+                    LocationAddressView(viewModel: locationViewModel)
                 }
                 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -63,7 +70,8 @@ struct BasketView: View {
 
 struct BasketView_Previews: PreviewProvider {
     static var previews: some View {
-        BasketView()
+        BasketView(viewModel: BasketViewModel())
+            .environmentObject(LocationAddressViewModel())
             .environmentObject({ () -> OrderService in
                 let service = OrderService()
                 service.order[MockData.dish] = 1

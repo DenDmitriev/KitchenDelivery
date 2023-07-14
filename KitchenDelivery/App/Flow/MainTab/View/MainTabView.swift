@@ -19,30 +19,13 @@ struct MainTabView: View {
     
     var body: some View {
         TabView(selection: $coordinator.tab) {
-            MenuView()
-                .tabItem {
-                    Label("Главная", image: "MainIcon")
-                }
-                .tag(MainTab.menu)
+            coordinator.buildTab(tab: .menu)
             
-            SearchView()
-                .tabItem {
-                    Label("Поиск", image: "SearchIcon")
-                }
-                .tag(MainTab.search)
-
-            BasketView()
-                .tabItem {
-                    Label("Корзина", image: "BasketIcon")
-                }
-                .environmentObject(UserSession.shared.orderService)
-                .tag(MainTab.basket)
-
-            AccountView()
-                .tabItem {
-                    Label("Аккаунт", image: "AccountIcon")
-                }
-                .tag(MainTab.account)
+            coordinator.buildTab(tab: .search)
+            
+            coordinator.buildTab(tab: .basket)
+            
+            coordinator.buildTab(tab: .account)
         }
         .onAppear {
             let tabBarAppearance = UITabBarAppearance()
