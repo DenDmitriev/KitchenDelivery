@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LocationAddressView: View {
     
-    @ObservedObject private var viewModel: LocationAddressViewModel
+    @ObservedObject var viewModel: LocationAddressViewModel
     
     init(viewModel: LocationAddressViewModel = LocationAddressViewModel()) {
         self.viewModel = viewModel

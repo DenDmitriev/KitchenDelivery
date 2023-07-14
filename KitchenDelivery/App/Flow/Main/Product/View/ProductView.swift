@@ -90,7 +90,7 @@ struct ProductView: View {
                     }
                     
                     Button {
-                        showingDish.toggle()
+                        showingDish = false
                     } label: {
                         Image("xmark")
                             .padding(GridApp.pt10)
