@@ -11,8 +11,8 @@ struct LocationAddressView: View {
     
     @ObservedObject private var viewModel: LocationAddressViewModel
     
-    init() {
-        self.viewModel = LocationAddressViewModel()
+    init(viewModel: LocationAddressViewModel = LocationAddressViewModel()) {
+        self.viewModel = viewModel
     }
     
     var body: some View {

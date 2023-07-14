@@ -19,8 +19,14 @@ class MainTabCoordinator: ObservableObject {
     // MARK: Stored Properties
 
     @Published var tab = MainTab.menu
+    
+    var menuView = MenuView()
+    var searchView = SearchView()
+    var basketView = BasketView()
+    var accountView = AccountView()
+    var locationViewModel = LocationAddressViewModel()
 
-    private let orderService: OrderService
+    let orderService: OrderService
 
     // MARK: Initialization
 

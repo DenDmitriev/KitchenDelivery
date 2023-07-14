@@ -52,9 +52,12 @@ class LocationAddressViewModel: ObservableObject {
         timer
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] timer in
-                print(timer)
-                self?.getLocation()
-                self?.counter += 1
+                guard let self = self else { return }
+                if self.counter >= 10 {
+                    cancelTimer()
+                }
+                self.getLocation()
+                self.counter += 1
             })
             .store(in: &store)
     }

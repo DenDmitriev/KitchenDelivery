@@ -10,6 +10,7 @@ import SwiftUI
 struct MenuView: View {
     
     @ObservedObject private var viewModel: MenuViewModel
+    @EnvironmentObject var locationViewModel: LocationAddressViewModel
     
     init() {
         self.viewModel = MenuViewModel()
@@ -32,7 +33,7 @@ struct MenuView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    LocationAddressView()
+                    LocationAddressView(viewModel: locationViewModel)
                 }
 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {

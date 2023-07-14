@@ -11,6 +11,7 @@ struct BasketView: View {
     
     @ObservedObject private var viewModel = BasketViewModel()
     @EnvironmentObject var orderService: OrderService
+    @EnvironmentObject var locationViewModel: LocationAddressViewModel
     
     var body: some View {
         NavigationStack {
@@ -49,7 +50,7 @@ struct BasketView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    LocationAddressView()
+                    LocationAddressView(viewModel: locationViewModel)
                 }
                 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
