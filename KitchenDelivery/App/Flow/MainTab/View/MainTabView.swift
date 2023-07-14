@@ -19,20 +19,21 @@ struct MainTabView: View {
     
     var body: some View {
         TabView(selection: $coordinator.tab) {
-            coordinator.menuView
+            MenuView(viewModel: coordinator.menuViewModel)
+                .environmentObject(coordinator)
                 .environmentObject(coordinator.locationViewModel)
                 .tabItem {
                     Label("Главная", image: "MainIcon")
                 }
                 .tag(MainTab.menu)
             
-            coordinator.searchView
+            SearchView(viewModel: coordinator.searchViewModel)
                 .tabItem {
                     Label("Поиск", image: "SearchIcon")
                 }
                 .tag(MainTab.search)
 
-            coordinator.basketView
+            BasketView(viewModel: coordinator.basketViewModel)
                 .environmentObject(coordinator.locationViewModel)
                 .environmentObject(coordinator.orderService)
                 .tabItem {
@@ -40,7 +41,7 @@ struct MainTabView: View {
                 }
                 .tag(MainTab.basket)
 
-            coordinator.accountView
+            AccountView(viewModel: coordinator.accountViewModel)
                 .tabItem {
                     Label("Аккаунт", image: "AccountIcon")
                 }

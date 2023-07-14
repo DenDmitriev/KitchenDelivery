@@ -20,10 +20,10 @@ class MainTabCoordinator: ObservableObject {
 
     @Published var tab = MainTab.menu
     
-    var menuView = MenuView()
-    var searchView = SearchView()
-    var basketView = BasketView()
-    var accountView = AccountView()
+    var menuViewModel = MenuViewModel()
+    var searchViewModel = SearchViewModel()
+    var basketViewModel = BasketViewModel()
+    var accountViewModel = AccountViewModel()
     var locationViewModel = LocationAddressViewModel()
 
     let orderService: OrderService

@@ -10,10 +10,10 @@ import SwiftUI
 struct MenuView: View {
     
     @ObservedObject private var viewModel: MenuViewModel
-    @EnvironmentObject var locationViewModel: LocationAddressViewModel
+    @EnvironmentObject var coordinator: MainTabCoordinator
     
-    init() {
-        self.viewModel = MenuViewModel()
+    init(viewModel: MenuViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -33,12 +33,12 @@ struct MenuView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    LocationAddressView(viewModel: locationViewModel)
+                    LocationAddressView(viewModel: coordinator.locationViewModel)
                 }
 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Image("account")
-                        .clipShape(Circle())
+                    AccountButton()
+                        .environmentObject(coordinator)
                 }
             }
         }
@@ -47,6 +47,8 @@ struct MenuView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView()
+        MenuView(viewModel: MenuViewModel())
+            .environmentObject(MainTabCoordinator())
+            .environmentObject(LocationAddressViewModel())
     }
 }

@@ -13,6 +13,10 @@ struct BasketView: View {
     @EnvironmentObject var orderService: OrderService
     @EnvironmentObject var locationViewModel: LocationAddressViewModel
     
+    init(viewModel: BasketViewModel) {
+        self.viewModel = viewModel
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -64,7 +68,8 @@ struct BasketView: View {
 
 struct BasketView_Previews: PreviewProvider {
     static var previews: some View {
-        BasketView()
+        BasketView(viewModel: BasketViewModel())
+            .environmentObject(LocationAddressViewModel())
             .environmentObject({ () -> OrderService in
                 let service = OrderService()
                 service.order[MockData.dish] = 1

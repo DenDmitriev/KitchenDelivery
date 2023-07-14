@@ -35,7 +35,7 @@ struct LocationAddressView: View {
 
 struct LoactionAdressView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationAddressView()
+        LocationAddressView(viewModel: LocationAddressViewModel())
             .previewLayout(.fixed(width: 300, height: 50))
     }
 }
