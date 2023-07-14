@@ -9,12 +9,8 @@ import SwiftUI
 
 struct MenuView: View {
     
-    @ObservedObject private var viewModel: MenuViewModel
+    @ObservedObject var viewModel: MenuViewModel
     @EnvironmentObject var coordinator: MainTabCoordinator
-    
-    init(viewModel: MenuViewModel) {
-        self.viewModel = viewModel
-    }
     
     var body: some View {
         NavigationStack {
@@ -23,6 +19,7 @@ struct MenuView: View {
                     ForEach(viewModel.categories, id: \.id) { category in
                         NavigationLink {
                             CategoryView(category: category)
+                                .environmentObject(coordinator)
                         } label: {
                             CategoryItem(category: category)
                                 .padding(.horizontal, GridApp.pt16)

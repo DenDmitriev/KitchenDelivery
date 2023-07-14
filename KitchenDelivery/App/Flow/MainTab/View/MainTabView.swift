@@ -32,7 +32,7 @@ struct MainTabView: View {
                     Label("Поиск", image: "SearchIcon")
                 }
                 .tag(MainTab.search)
-
+            
             BasketView(viewModel: coordinator.basketViewModel)
                 .environmentObject(coordinator.locationViewModel)
                 .environmentObject(coordinator.orderService)
@@ -40,7 +40,7 @@ struct MainTabView: View {
                     Label("Корзина", image: "BasketIcon")
                 }
                 .tag(MainTab.basket)
-
+            
             AccountView(viewModel: coordinator.accountViewModel)
                 .tabItem {
                     Label("Аккаунт", image: "AccountIcon")

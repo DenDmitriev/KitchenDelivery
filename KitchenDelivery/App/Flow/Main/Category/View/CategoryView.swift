@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CategoryView: View {
     
+    @EnvironmentObject var coordinator: MainTabCoordinator
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject private var viewModel: CategoryViewModel
     @State private var selectedTag: Int = .zero
@@ -52,8 +53,7 @@ struct CategoryView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Image("account")
-                    .clipShape(Circle())
+                AccountButton()
             }
             
             ToolbarItem(placement: .navigationBarLeading) {
@@ -64,7 +64,8 @@ struct CategoryView: View {
                         .accentColor(.primary)
                 }
             }
-        }.overlay {
+        }
+        .overlay {
             ZStack {
                 if $showingDish.wrappedValue,
                    let dish = viewModel.getDish(by: selectedDishID) {
@@ -83,5 +84,6 @@ struct CategoryView: View {
 struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
         CategoryView(category: MockData.category)
+            .environmentObject(MainTabCoordinator())
     }
 }

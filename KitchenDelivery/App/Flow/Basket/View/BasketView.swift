@@ -39,7 +39,9 @@ struct BasketView: View {
                     ZStack {
                         Color.accentColor
                         
-                        Text("Оплатить \(CurrencyFormatter.formatter(by: Double(orderService.total)))")
+                        Text(viewModel.orderIsEmpty(orderService: orderService)
+                             ? "Выберите блюдо в меню"
+                             : "Оплатить \(viewModel.totalOrder(orderService: orderService))")
                             .font(Font.system(size: GridApp.pt16).weight(.medium))
                             .kerning(0.1)
                             .multilineTextAlignment(.center)
@@ -49,8 +51,8 @@ struct BasketView: View {
                     .frame(maxWidth: .infinity)
                     .cornerRadius(GridApp.cr10)
                     .padding(GridApp.pt16)
-                    
                 }
+                .disabled(viewModel.orderIsEmpty(orderService: orderService))
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
