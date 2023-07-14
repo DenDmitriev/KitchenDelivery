@@ -35,7 +35,7 @@ class CategoryViewModel: ObservableObject {
             .sink { completion in
                 switch completion {
                 case .finished:
-                    print(completion)
+                    return
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

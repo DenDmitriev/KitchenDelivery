@@ -20,11 +20,11 @@ struct LocationAddressView: View {
             Image("locationMark")
             
             VStack(alignment: .leading, spacing: GridApp.pt4) {
-                Text(viewModel.city ?? "City")
+                Text(viewModel.city ?? "")
                     .font(CustomFont.titleMedium18)
                     .foregroundColor(.primary)
                 
-                Text(viewModel.dateString ?? "Date")
+                Text(viewModel.dateString ?? "")
                     .font(CustomFont.title14)
                     .kerning(0.14)
                     .foregroundColor(.secondary)
