@@ -1,5 +1,8 @@
 # KitchenDelivery
-Тестовое задание от компании
+Приложение для заказа еды.
+
+![Overview](https://github.com/DenDmitriev/KitchenDelivery/assets/65191747/53707655-b311-494f-87b7-21422a40fce8)
+
 
 # Макет
 
